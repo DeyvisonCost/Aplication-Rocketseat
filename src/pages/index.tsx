@@ -49,7 +49,7 @@ export default function Home({
   preview,
 }: HomeProps): ReactElement {
   function getReadTime(item: Post): number {
-    const totalWords = item.data.content.reduce((total, contentItem) => {
+    const totalWords = item.data.content?.reduce((total, contentItem) => {
       // total += contentItem.heading.split(' ').length;
 
       const words = contentItem.body.map(i => i.text.split(' ').length);
@@ -180,7 +180,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
     }
   );
 
-  // console.log('AQUIIII !!!  ', JSON.stringify(postsResponse.results, null, 2));
+
 
   const posts = postsResponse.results.map(post => {
     return {
@@ -191,7 +191,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
         subtitle: post.data.subtitle,
         author: post.data.author,
         content: post.data.content?.map(dataContent => {
-          console.log('AQUIIIIIIIIIIIIIIIIIIIIIEEEEEEEEE !!!!  ' , dataContent);
+
           return {
             heading: dataContent.heading,
             body: [...dataContent.body],
